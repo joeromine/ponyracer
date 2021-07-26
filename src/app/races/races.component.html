@@ -1,0 +1,14 @@
+<p [textContent]="title"></p>
+<button (click)="refreshRaces($event);name.focus()">Refresh Race List</button>
+<p [textContent]="countRaces"></p>
+<select>
+    <option [selected]="ponyIsSelected" value="London Funny">FUN</option>
+    <option value="Yahoo Yuma">Yuma</option>
+</select>
+
+<br>
+<input type="text" #name>
+<br>
+<ng-template [ngIf]="races.length > 0">
+    <div>Race list</div>
+</ng-template>
