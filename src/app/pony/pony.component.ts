@@ -13,7 +13,6 @@ export class PonyComponent {
   getPonyImageUrl() {
     return `assets/images/pony-${this.ponyModel?.color?.toLowerCase()}.gif`;
   }
-  
 
   clicked(): void {
     this.ponyClicked.emit(this.ponyModel);
