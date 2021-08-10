@@ -5,7 +5,7 @@ export class RaceModel {
   startInstant!: string;
 }
 
-class Ponies {
+export class Ponies {
   id!: number;
   name!: string;
   color!: string;
