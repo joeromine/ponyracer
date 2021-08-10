@@ -1,12 +1,8 @@
-export class RaceModel {
-  id!: number;
-  name!: string;
-  ponies!: Array<Ponies>;
-  startInstant!: string;
-}
+import { PonyModel } from './pony.model';
 
-export class Ponies {
-  id!: number;
-  name!: string;
-  color!: string;
+export interface RaceModel {
+  id: number;
+  name: string;
+  ponies: Array<PonyModel>;
+  startInstant: string;
 }

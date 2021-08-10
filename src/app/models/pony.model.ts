@@ -1,5 +1,5 @@
-export class PonyModel {
-  id!: number;
-  name!: string;
-  color!: string;
+export interface PonyModel {
+  id: number;
+  name: string;
+  color: string;
 }

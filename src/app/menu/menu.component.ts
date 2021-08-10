@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'pr-menu',
@@ -6,10 +6,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
-  @Input() navbarCollapsed = true;
-  constructor() {}
+  navbarCollapsed = true;
 
-  toggleNavbar() {
-    this.navbarCollapsed = this.navbarCollapsed ? false : true;
+  toggleNavbar(): void {
+    this.navbarCollapsed = !this.navbarCollapsed;
   }
 }
