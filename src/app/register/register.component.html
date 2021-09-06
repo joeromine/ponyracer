@@ -1,0 +1,10 @@
+<p>register works!</p>
+<form (ngSubmit)="register()" [formGroup]="userForm">
+    <input formControlName="userName"><br>
+    <div *ngIf="true">Login is required</div><br>
+    <pre>{{userForm.get(userName).e | json}}</pre>
+    <br>
+    <input formControlName="password"><br>
+    <input type="date" formControlName="birthYear"><br>
+    <button>Lets Go</button><br>
+</form>
