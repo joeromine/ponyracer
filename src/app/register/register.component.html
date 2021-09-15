@@ -1,11 +1,13 @@
 <form (ngSubmit)="register()" [formGroup]="userForm">
   Login<br />
   <input
-    [ngClass]="{'alwrong': userForm.get('login')?.dirty && userForm.get('login')?.invalid }"
+    [ngClass]="{'mb-3': userForm.get('login')?.dirty && userForm.get('login')?.invalid }"
     type="text"
     formControlName="login"
   /><br />
-  <div *ngIf="userForm.get('login')?.dirty && userForm.get('login')?.hasError('required')">Login is required</div>
+  <div *ngIf="userForm.get('login')?.dirty && userForm.get('login')?.hasError('required')"
+  >Login is required
+</div>
   <br />
   password<br />
   <input
