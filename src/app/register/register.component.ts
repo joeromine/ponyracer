@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,28 +6,26 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   userForm: FormGroup;
   passwordCtrl: FormControl;
-  
+  loginCtrl: FormControl = new FormControl('', Validators.required);
+  birthYearCtrl: FormControl;
+
   constructor(fb: FormBuilder) {
-    this.passwordCtrl = fb.control('',Validators.required);
+    this.passwordCtrl = fb.control('', Validators.required);
+    this.birthYearCtrl = fb.control('', Validators.required);
+    this.loginCtrl = fb.control('', Validators.required);
 
-
-    this.userForm =  fb.group({
-      userName: '', password: this.passwordCtrl, birthYear: fb.control('')
-    },{ validators: Validators.required })
-   }
-
-   
-
-  ngOnInit(): void {
-
+    this.userForm = fb.group({
+      login: this.loginCtrl,
+      password: this.passwordCtrl,
+      birthYear: this.birthYearCtrl
+    });
   }
 
-  register(){
-
+  register() {
+    console.log('OWO');
   }
- 
 
 }
