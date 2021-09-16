@@ -1,29 +1,32 @@
-<form (ngSubmit)="register()" [formGroup]="userForm">
-  Login<br />
-  <input
-    [ngClass]="{'mb-3': userForm.get('login')?.dirty && userForm.get('login')?.invalid }"
-    type="text"
-    formControlName="login"
-  /><br />
-  <div *ngIf="userForm.get('login')?.dirty && userForm.get('login')?.hasError('required')"
-  >Login is required
-</div>
-  <br />
-  password<br />
-  <input
-    [ngClass]="{'alwrong': userForm.get('password')?.dirty && userForm.get('password')?.invalid }"
-    type="password"
-    formControlName="password"
-  />
-  <div *ngIf="userForm.get('password')?.dirty && userForm.get('password')?.hasError('required')">password is required</div>
-  <br />
-  date<br />
-  <input
-    [ngClass]="{'alwrong': userForm.get('birthYear')?.dirty && userForm.get('birthYear')?.invalid }"
-    type="number"
-    formControlName="birthYear"
-  />
-  <div *ngIf="userForm.get('birthYear')?.dirty && userForm.get('birthYear')?.hasError('required')">birth Year is required</div>
-  <br />
+<form (ngSubmit)="regirominester()" [formGroup]="userForm">
+  <div class="mb-3">
+    Login<br />
+    <input
+      [ngClass]="{'alwrong': userForm.get('login')?.dirty && userForm.get('login')?.invalid }"
+      type="text"
+      formControlName="login"
+    /><br />
+    <div *ngIf="userForm.get('login')?.dirty && userForm.get('login')?.hasError('required')">Login is required</div>
+    <br />
+  </div>
+  <div class="mb-3">
+    password<br />
+    <input
+      [ngClass]="{'alwrong': userForm.get('password')?.dirty && userForm.get('password')?.invalid }"
+      type="password"
+      formControlName="password"
+    />
+    <div *ngIf="userForm.get('password')?.dirty && userForm.get('password')?.hasError('required')">Password is required</div>
+    <br />
+  </div>
+  <div class="mb-3">
+    date<br />
+    <input
+      [ngClass]="{'alwrong': userForm.get('birthYear')?.dirty && userForm.get('birthYear')?.hasError('required') }"
+      type="number"
+      formControlName="birthYear"
+    />
+    <div *ngIf="userForm.get('birthYear')?.dirty && userForm.get('birthYear')?.hasError('required')">Birth year is required</div>
+  </div>
   <button [disabled]="userForm.invalid">Lets Go</button><br />
 </form>

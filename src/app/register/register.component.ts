@@ -24,8 +24,5 @@ export class RegisterComponent {
     });
   }
 
-  register() {
-    console.log('OWO');
-  }
-
+  register() {}
 }

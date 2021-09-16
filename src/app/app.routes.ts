@@ -8,5 +8,5 @@ import { RegisterComponent } from './register/register.component';
 export const ROUTES: Routes = [
   { path: 'races', component: RacesComponent },
   { path: '', component: HomeComponent },
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent }
 ];
