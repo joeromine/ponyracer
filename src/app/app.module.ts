@@ -16,7 +16,8 @@ import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [AppComponent, MenuComponent, RacesComponent, RaceComponent, PonyComponent, FromNowPipe, HomeComponent, RegisterComponent],
-  imports: [BrowserModule, ReactiveFormsModule, HttpClientModule, RouterModule.forRoot(ROUTES)],
+  imports: [BrowserModule, HttpClientModule, ReactiveFormsModule, RouterModule.forRoot(ROUTES)],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
