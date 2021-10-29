@@ -1,4 +1,4 @@
-<form (ngSubmit)="regirominester()" [formGroup]="userForm">
+<form (ngSubmit)="register()" [formGroup]="userForm">
   <div class="mb-3">
     Login<br />
     <input
@@ -7,6 +7,9 @@
       formControlName="login"
     /><br />
     <div *ngIf="userForm.get('login')?.dirty && userForm.get('login')?.hasError('required')">Login is required</div>
+    <div id="login-length-error" *ngIf="userForm.get('login')?.dirty && userForm.get('login')?.hasError('minlength')">
+      Your login should be at least 3 characters
+    </div>
     <br />
   </div>
   <div class="mb-3">

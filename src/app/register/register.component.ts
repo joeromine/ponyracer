@@ -12,9 +12,9 @@ export class RegisterComponent {
   birthYearCtrl: FormControl;
 
   constructor(fb: FormBuilder) {
-    this.passwordCtrl = fb.control('', Validators.required);
+    this.passwordCtrl = fb.control('', [Validators.required]);
     this.birthYearCtrl = fb.control('', Validators.required);
-    this.loginCtrl = fb.control('', Validators.required);
+    this.loginCtrl = fb.control('', [Validators.required, Validators.minLength(3)]);
 
     this.userForm = fb.group({
       login: this.loginCtrl,
