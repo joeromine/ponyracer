@@ -27,6 +27,7 @@
         formControlName="confirmPassword"
       />
       <div *ngIf="confirmPasswordCtrl.dirty && confirmPasswordCtrl.hasError('required')">Confirming password is required</div>
+      <div *ngIf="(passwordCtrl.dirty || confirmPasswordCtrl.dirty) && passwordForm.invalid">Your password does not match</div>
       <br />
     </div>
   </div>
