@@ -1,4 +1,4 @@
-<form (ngSubmit)="register()" [formGroup]="userForm">
+<form (ngSubmit)="register(userForm)" [formGroup]="userForm">
   <div class="">
     Login<br />
     <input
@@ -12,7 +12,7 @@
     </div>
     <br />
   </div>
-  <div [formGroup]="passwordForm">
+  <div formGroupName="passwordForm">
     <div class="mb-3">
       password<br />
       <input [ngClass]="{'alwrong': passwordCtrl.dirty && passwordCtrl.invalid }" type="password" formControlName="password" />
@@ -27,7 +27,9 @@
         formControlName="confirmPassword"
       />
       <div *ngIf="confirmPasswordCtrl.dirty && confirmPasswordCtrl.hasError('required')">Confirming password is required</div>
-      <div *ngIf="(passwordCtrl.dirty || confirmPasswordCtrl.dirty) && passwordForm.invalid">Your password does not match</div>
+      <div *ngIf="(passwordCtrl.dirty || confirmPasswordCtrl.dirty) && passwordForm.hasError('matchingError')">
+        Your password does not match
+      </div>
       <br />
     </div>
   </div>
