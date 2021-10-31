@@ -27,7 +27,7 @@
         formControlName="confirmPassword"
       />
       <div *ngIf="confirmPasswordCtrl.dirty && confirmPasswordCtrl.hasError('required')">Confirming password is required</div>
-      <div *ngIf="(passwordCtrl.dirty || confirmPasswordCtrl.dirty) && passwordForm.hasError('matchingError')">
+      <div *ngIf="(passwordCtrl.dirty || confirmPasswordCtrl.dirty) && passwordForm.hasError('matchingError')" id="password-matching-error">
         Your password does not match
       </div>
       <br />
@@ -41,6 +41,9 @@
       formControlName="birthYear"
     />
     <div *ngIf="userForm.get('birthYear')?.dirty && userForm.get('birthYear')?.hasError('required')">Birth year is required</div>
+    <div *ngIf="birthYearCtrl.dirty && (birthYearCtrl?.hasError('min') || birthYearCtrl?.hasError('max'))" id="invalid-year-error">
+      This is not a valid year
+    </div>
   </div>
   <button [disabled]="userForm.invalid">Lets Go</button><br />
 </form>

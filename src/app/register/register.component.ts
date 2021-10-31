@@ -25,7 +25,11 @@ export class RegisterComponent {
     this.userForm = fb.group({
       login: (this.loginCtrl = fb.control('', [Validators.required, Validators.minLength(3)])),
       passwordForm: this.passwordForm,
-      birthYear: (this.birthYearCtrl = fb.control('', Validators.required))
+      birthYear: (this.birthYearCtrl = fb.control('', [
+        Validators.required,
+        Validators.min(1900),
+        Validators.max(new Date().getFullYear())
+      ]))
     });
   }
 
