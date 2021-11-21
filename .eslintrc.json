@@ -57,5 +57,11 @@
         "@angular-eslint/template/no-distracting-elements": "error"
       }
     }
+  ],
+  "prettier/prettier": [
+    "error",
+    {
+      "endOfLine": "auto"
+    }
   ]
 }
