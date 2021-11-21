@@ -1,4 +1,5 @@
-<form (ngSubmit)="regirominester()" [formGroup]="userForm">
+/* eslint-disable prettier/prettier */
+<form (ngSubmit)="register()" [formGroup]="userForm">
   <div class="mb-3">
     Login<br />
     <input
@@ -7,16 +8,32 @@
       formControlName="login"
     /><br />
     <div *ngIf="userForm.get('login')?.dirty && userForm.get('login')?.hasError('required')">Login is required</div>
+    <div id="login-length-error" *ngIf="userForm.get('login')?.dirty && userForm.get('login')?.hasError('minlength')">
+      Your login should be at least 3 characters
+    </div>
     <br />
   </div>
   <div class="mb-3">
     password<br />
-    <input
-      [ngClass]="{'alwrong': userForm.get('password')?.dirty && userForm.get('password')?.invalid }"
-      type="password"
-      formControlName="password"
-    />
+    <div formGroupName="passwordForm">
+      <input
+        [ngClass]="{'alwrong': userForm.get('password')?.dirty && userForm.get('password')?.invalid }"
+        type="password"
+        formControlName="password"
+      />
+      <input
+        [ngClass]="{'alwrong': userForm.get('confirmPassword')?.dirty && userForm.get('confirmPassword')?.invalid }"
+        type="password"
+        formControlName="confirmPassword"
+      />
+    </div>
     <div *ngIf="userForm.get('password')?.dirty && userForm.get('password')?.hasError('required')">Password is required</div>
+    <div *ngIf="userForm.get('confirmPassword')?.dirty && userForm.get('confirmPassword')?.hasError('required')">
+      Confirming password is required
+    </div>
+    <div id="password-matching-error" *ngIf="userForm.get('password')?.value !==  userForm.get('confirmPassword')?.value">
+      >Your password does not match
+    </div>
     <br />
   </div>
   <div class="mb-3">
@@ -27,6 +44,9 @@
       formControlName="birthYear"
     />
     <div *ngIf="userForm.get('birthYear')?.dirty && userForm.get('birthYear')?.hasError('required')">Birth year is required</div>
+    <div id="invalid-year-error" *ngIf="userForm.get('birthYear')?.dirty && userForm.get('birthYear')?.hasError('required')">
+      This is not a valid year
+    </div>
   </div>
   <button [disabled]="userForm.invalid">Lets Go</button><br />
 </form>
