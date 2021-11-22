@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserModel } from '../models/user.model';
+import { UserService } from '../user.service';
 
 @Component({
   templateUrl: './register.component.html',
@@ -7,13 +10,14 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class RegisterComponent {
   userForm: FormGroup;
+  actualUser!: UserModel;
+  registrationFailed: boolean = false;
   passwordCtrl: FormControl;
   passwordForm: FormGroup;
   confirmPasswordCtrl: FormControl;
   loginCtrl: FormControl;
   birthYearCtrl: FormControl;
-
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, public user: UserService, public r: Router) {
     this.passwordForm = fb.group(
       {
         password: (this.passwordCtrl = fb.control('', [Validators.required])),
@@ -35,6 +39,20 @@ export class RegisterComponent {
 
   register(form: any) {
     console.log(form);
+    this.user
+      .register(
+        this.userForm.controls['login'].value,
+        this.passwordForm.controls['password'].value,
+        this.userForm.controls['birthYear'].value
+      )
+      .subscribe(
+        (fetchedUser: any) => {
+          console.log(fetchedUser);
+          this.actualUser = fetchedUser;
+          this.r.navigate(['']);
+        },
+        e => (this.registrationFailed = true)
+      );
   }
 
   static passwordMatch(passwordfg: FormGroup): { matchingError: true } | null {
