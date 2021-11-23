@@ -1,40 +1,37 @@
-/* eslint-disable prettier/prettier */
-<form (ngSubmit)="register()" [formGroup]="userForm">
-  <div class="mb-3">
+<form (ngSubmit)="register(userForm)" [formGroup]="userForm">
+  <div class="">
     Login<br />
     <input
       [ngClass]="{'alwrong': userForm.get('login')?.dirty && userForm.get('login')?.invalid }"
       type="text"
       formControlName="login"
     /><br />
-    <div *ngIf="userForm.get('login')?.dirty && userForm.get('login')?.hasError('required')">Login is required</div>
-    <div id="login-length-error" *ngIf="userForm.get('login')?.dirty && userForm.get('login')?.hasError('minlength')">
+    <div *ngIf="loginCtrl?.dirty && loginCtrl.hasError('required')">Login is required</div>
+    <div id="login-length-error" *ngIf="loginCtrl.dirty && loginCtrl?.hasError('minlength')">
       Your login should be at least 3 characters
     </div>
     <br />
   </div>
-  <div class="mb-3">
-    password<br />
-    <div formGroupName="passwordForm">
+  <div formGroupName="passwordForm">
+    <div class="mb-3">
+      password<br />
+      <input [ngClass]="{'alwrong': passwordCtrl.dirty && passwordCtrl.invalid }" type="password" formControlName="password" />
+      <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">Password is required</div>
+      <br />
+    </div>
+    <div class="mb-3">
+      confirm password<br />
       <input
-        [ngClass]="{'alwrong': userForm.get('password')?.dirty && userForm.get('password')?.invalid }"
-        type="password"
-        formControlName="password"
-      />
-      <input
-        [ngClass]="{'alwrong': userForm.get('confirmPassword')?.dirty && userForm.get('confirmPassword')?.invalid }"
+        [ngClass]="{'alwrong': confirmPasswordCtrl.dirty && confirmPasswordCtrl.invalid }"
         type="password"
         formControlName="confirmPassword"
       />
+      <div *ngIf="confirmPasswordCtrl.dirty && confirmPasswordCtrl.hasError('required')">Confirming password is required</div>
+      <div *ngIf="(passwordCtrl.dirty || confirmPasswordCtrl.dirty) && passwordForm.hasError('matchingError')" id="password-matching-error">
+        Your password does not match
+      </div>
+      <br />
     </div>
-    <div *ngIf="userForm.get('password')?.dirty && userForm.get('password')?.hasError('required')">Password is required</div>
-    <div *ngIf="userForm.get('confirmPassword')?.dirty && userForm.get('confirmPassword')?.hasError('required')">
-      Confirming password is required
-    </div>
-    <div id="password-matching-error" *ngIf="userForm.get('password')?.value !==  userForm.get('confirmPassword')?.value">
-      >Your password does not match
-    </div>
-    <br />
   </div>
   <div class="mb-3">
     date<br />
@@ -44,7 +41,7 @@
       formControlName="birthYear"
     />
     <div *ngIf="userForm.get('birthYear')?.dirty && userForm.get('birthYear')?.hasError('required')">Birth year is required</div>
-    <div id="invalid-year-error" *ngIf="userForm.get('birthYear')?.dirty && userForm.get('birthYear')?.hasError('required')">
+    <div *ngIf="birthYearCtrl.dirty && (birthYearCtrl?.hasError('min') || birthYearCtrl?.hasError('max'))" id="invalid-year-error">
       This is not a valid year
     </div>
   </div>
