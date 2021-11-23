@@ -37,8 +37,7 @@ export class RegisterComponent {
     });
   }
 
-  register(form: any) {
-    console.log(form);
+  register() {
     this.user
       .register(
         this.userForm.controls['login'].value,

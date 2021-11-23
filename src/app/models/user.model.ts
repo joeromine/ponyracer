@@ -1,6 +1,7 @@
 export interface UserModel {
-  id: string;
-  money: string;
+  id: number;
+  money: number;
   token: string;
   login: string;
+  registrationInstant: string;
 }
