@@ -10,14 +10,14 @@ import { UserService } from '../user.service';
 })
 export class RegisterComponent {
   userForm: FormGroup;
-  actualUser!: UserModel;
+  actualUser: UserModel | undefined;
   registrationFailed: boolean = false;
   passwordCtrl: FormControl;
   passwordForm: FormGroup;
   confirmPasswordCtrl: FormControl;
   loginCtrl: FormControl;
   birthYearCtrl: FormControl;
-  constructor(fb: FormBuilder, public user: UserService, public r: Router) {
+  constructor(fb: FormBuilder, public userService: UserService, public r: Router) {
     this.passwordForm = fb.group(
       {
         password: (this.passwordCtrl = fb.control('', [Validators.required])),
@@ -37,20 +37,12 @@ export class RegisterComponent {
     });
   }
 
-  register() {
-    this.user
-      .register(
-        this.userForm.controls['login'].value,
-        this.passwordForm.controls['password'].value,
-        this.userForm.controls['birthYear'].value
-      )
+  register(): void {
+    this.userService
+      .register(this.userForm.value.login, this.userForm.value.passwordForm.value.password, this.userForm.value.birthYear)
       .subscribe(
-        (fetchedUser: any) => {
-          console.log(fetchedUser);
-          this.actualUser = fetchedUser;
-          this.r.navigate(['']);
-        },
-        e => (this.registrationFailed = true)
+        () => this.r.navigate(['']),
+        () => (this.registrationFailed = true)
       );
   }
 
