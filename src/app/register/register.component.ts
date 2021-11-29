@@ -38,12 +38,10 @@ export class RegisterComponent {
   }
 
   register(): void {
-    this.userService
-      .register(this.userForm.value.login, this.userForm.value.passwordForm.value.password, this.userForm.value.birthYear)
-      .subscribe(
-        () => this.r.navigate(['']),
-        () => (this.registrationFailed = true)
-      );
+    this.userService.register(this.userForm.value.login, this.passwordForm.value.password, this.userForm.value.birthYear).subscribe(
+      () => this.r.navigate(['/']),
+      () => (this.registrationFailed = true)
+    );
   }
 
   static passwordMatch(passwordfg: FormGroup): { matchingError: true } | null {

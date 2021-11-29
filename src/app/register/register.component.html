@@ -6,7 +6,7 @@
       type="text"
       formControlName="login"
     /><br />
-    <div *ngIf="loginCtrl?.dirty && loginCtrl.hasError('required')">Login is required</div>
+    <div class="mb-3" *ngIf="loginCtrl?.dirty && loginCtrl.hasError('required')">Login is required</div>
     <div id="login-length-error" *ngIf="loginCtrl.dirty && loginCtrl?.hasError('minlength')">
       Your login should be at least 3 characters
     </div>
@@ -46,4 +46,5 @@
     </div>
   </div>
   <button [disabled]="userForm.invalid">Lets Go</button><br />
+  <div id="registration-error" *ngIf="registrationFailed">Try again with another login.</div>
 </form>
