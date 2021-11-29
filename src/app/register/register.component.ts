@@ -11,23 +11,28 @@ import { UserService } from '../user.service';
 export class RegisterComponent {
   userForm: FormGroup;
   actualUser: UserModel | undefined;
-  registrationFailed: boolean = false;
+  registrationFailed = false;
   passwordCtrl: FormControl;
   passwordForm: FormGroup;
   confirmPasswordCtrl: FormControl;
   loginCtrl: FormControl;
   birthYearCtrl: FormControl;
   constructor(fb: FormBuilder, public userService: UserService, public r: Router) {
+    this.passwordCtrl = fb.control('', [Validators.required]);
+    this.confirmPasswordCtrl = fb.control('', [Validators.required]);
+    this.loginCtrl = fb.control('', [Validators.required, Validators.minLength(3)]);
     this.passwordForm = fb.group(
       {
-        password: (this.passwordCtrl = fb.control('', [Validators.required])),
-        confirmPassword: (this.confirmPasswordCtrl = fb.control('', [Validators.required]))
+        password: this.passwordCtrl,
+        confirmPassword: this.confirmPasswordCtrl
       },
-      { validator: RegisterComponent.passwordMatch }
+       {
+        validator: RegisterComponent.passwordMatch
+      }
     );
 
     this.userForm = fb.group({
-      login: (this.loginCtrl = fb.control('', [Validators.required, Validators.minLength(3)])),
+      login: this.loginCtrl,
       passwordForm: this.passwordForm,
       birthYear: (this.birthYearCtrl = fb.control('', [
         Validators.required,
@@ -38,10 +43,10 @@ export class RegisterComponent {
   }
 
   register(): void {
-    this.userService.register(this.userForm.value.login, this.passwordForm.value.password, this.userForm.value.birthYear).subscribe(
-      () => this.r.navigate(['/']),
-      () => (this.registrationFailed = true)
-    );
+    this.userService.register(this.userForm.value.login, this.passwordForm.value.password, this.userForm.value.birthYear).subscribe({
+      next: () => this.r.navigate(['/']),
+      error: () => (this.registrationFailed = true)
+    });
   }
 
   static passwordMatch(passwordfg: FormGroup): { matchingError: true } | null {
