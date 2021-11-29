@@ -1,12 +1,8 @@
 <form (ngSubmit)="register()" [formGroup]="userForm">
-  <div class="">
-    Login<br />
-    <input
-      [ngClass]="{'alwrong': userForm.get('login')?.dirty && userForm.get('login')?.invalid }"
-      type="text"
-      formControlName="login"
-    /><br />
-    <div class="mb-3" *ngIf="loginCtrl?.dirty && loginCtrl.hasError('required')">Login is required</div>
+  <div class="mb-3">
+    <label class="d-block">Login</label>
+    <input [ngClass]="{'alwrong': userForm.get('login')?.dirty && userForm.get('login')?.invalid }"  type="text"   formControlName="login"/>
+    <div id="login-warning" class="mb-3" *ngIf="loginCtrl.dirty && loginCtrl.hasError('required')">Login is required</div>
     <div id="login-length-error" *ngIf="loginCtrl.dirty && loginCtrl?.hasError('minlength')">
       Your login should be at least 3 characters
     </div>
